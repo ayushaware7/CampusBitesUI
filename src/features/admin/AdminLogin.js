@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const ADMIN_LOGIN_URL = "http://localhost:8080/auth/login";
+import { adminApi } from '../../services/api';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -16,22 +15,7 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const response = await fetch(ADMIN_LOGIN_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Invalid username or password');
-      }
-
-      const data = await response.json(); // { token: "..." }
-
-      // --- THIS IS THE KEY ---
-      // Save the token to localStorage
+      const data = await adminApi.login(username, password); // { token }
       localStorage.setItem('adminToken', data.token);
 
       // Redirect to the admin dashboard

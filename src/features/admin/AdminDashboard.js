@@ -4,6 +4,7 @@ import AdminLiveOrders from './AdminLiveOrders';
 import AdminPastOrders from './AdminPastOrders';
 import AdminMenu from './AdminMenu';
 import AdminAddonGroups from './AdminAddonGroups';
+import AdminBranding from './AdminBranding';
 import useLiveOrders from './useLiveOrders';
 
 const TABS = [
@@ -11,6 +12,7 @@ const TABS = [
   { id: 'addons', label: 'Add-ons' },
   { id: 'live', label: 'Live Orders' },
   { id: 'past', label: 'Past Orders' },
+  { id: 'branding', label: 'Branding' },
 ];
 
 const AdminDashboard = () => {
@@ -25,14 +27,15 @@ const AdminDashboard = () => {
 
   const buttonClass = (id) =>
     activeView === id
-      ? 'text-lg font-medium text-white bg-orange-500 py-2 px-4 rounded-lg shadow-md'
-      : 'text-lg font-medium text-gray-600 hover:text-orange-500 py-2 px-4';
+      ? 'text-lg font-medium text-white bg-brand-500 py-2 px-4 rounded-lg shadow-md'
+      : 'text-lg font-medium text-gray-600 hover:text-brand-500 py-2 px-4';
 
   const views = {
     menu: <AdminMenu />,
     addons: <AdminAddonGroups />,
     live: <AdminLiveOrders {...live} />,
     past: <AdminPastOrders />,
+    branding: <AdminBranding />,
   };
 
   return (
@@ -48,7 +51,7 @@ const AdminDashboard = () => {
                   <span
                     aria-label={`${live.orders.length} live orders`}
                     className={`ml-2 rounded-full min-w-[1.5rem] h-6 px-1.5 flex items-center justify-center text-sm font-bold ${
-                      activeView === 'live' ? 'bg-white text-orange-600' : 'bg-orange-500 text-white'
+                      activeView === 'live' ? 'bg-white text-brand-600' : 'bg-brand-500 text-white'
                     }`}
                   >
                     {live.orders.length}

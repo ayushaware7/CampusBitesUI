@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
+import { useBrand } from '../../contexts/BrandContext';
 import { Menu, X, ShoppingCart, Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
   const { totalItems } = useCart();
+  const brand = useBrand();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const [activePage, setActivePage] = useState('/');
@@ -54,40 +56,33 @@ const Navbar = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/">
-                <img className="h-40" src="/images/logo1.jpeg" alt="FoodDelivery Logo" />
+              <Link to="/menu" className="flex items-center">
+                {brand.logoUrl || !brand.loaded ? (
+                  <img className="h-40" src={brand.logoUrl || '/images/logo1.jpeg'} alt={brand.name} />
+                ) : (
+                  <span className="text-xl font-bold text-brand-600">{brand.name}</span>
+                )}
+                {brand.tagline && <span className="hidden lg:block ml-3 text-sm text-gray-500">{brand.tagline}</span>}
               </Link>
             </div>
             
             {/* Desktop menu */}
             <div className="hidden md:ml-6 md:flex md:space-x-8">
-              <Link 
-                to="/" 
-                className={`${isActive('/') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/menu" 
-                className={`${isActive('/menu') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              <Link
+                to="/menu"
+                className={`${isActive('/menu') ? 'text-brand-600 border-brand-500' : 'border-transparent text-gray-600 hover:border-brand-300 hover:text-brand-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 Menu
               </Link>
               <Link 
                 to="/specials" 
-                className={`${isActive('/specials') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${isActive('/specials') ? 'text-brand-600 border-brand-500' : 'border-transparent text-gray-600 hover:border-brand-300 hover:text-brand-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 Today's Specials
               </Link>
               <Link 
-                to="/about" 
-                className={`${isActive('/about') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                About
-              </Link>
-              <Link 
                 to="/track-orders" 
-                className={`${isActive('/track-orders') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium relative`}
+                className={`${isActive('/track-orders') ? 'text-brand-600 border-brand-500' : 'border-transparent text-gray-600 hover:border-brand-300 hover:text-brand-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium relative`}
               >
                 Track Orders
                 {activeOrdersCount > 0 && (
@@ -101,18 +96,18 @@ const Navbar = () => {
           
           <div className="flex items-center">
             <div className="hidden md:flex md:items-center md:space-x-4">
-              <Link to="/cart" className="flex items-center text-gray-600 hover:text-orange-500 relative">
+              <Link to="/cart" className="flex items-center text-gray-600 hover:text-brand-500 relative">
                 <ShoppingCart className="h-6 w-6" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-orange-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  <span className="absolute -top-2 -right-2 bg-brand-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
                     {totalItems}
                   </span>
                 )}
-                <span className={`${isActive('/specials') ? 'ml-2 text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>Your Cart</span>
+                <span className={`${isActive('/specials') ? 'ml-2 text-brand-600 border-brand-500' : 'border-transparent text-gray-600 hover:border-brand-300 hover:text-brand-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}>Your Cart</span>
               </Link>
               {/* <Link 
                 to="/cart" 
-                className={`${isActive('/specials') ? 'text-orange-600 border-orange-500' : 'border-transparent text-gray-600 hover:border-orange-300 hover:text-orange-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+                className={`${isActive('/specials') ? 'text-brand-600 border-brand-500' : 'border-transparent text-gray-600 hover:border-brand-300 hover:text-brand-600'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
               >
                 Your Cart
               </Link> */}
@@ -123,7 +118,7 @@ const Navbar = () => {
             <div className="flex md:hidden">
               <button
                 onClick={toggleMenu}
-                className="inline-flex items-center justify-center p-2 rounded-md text-orange-500 hover:text-orange-600 hover:bg-orange-50"
+                className="inline-flex items-center justify-center p-2 rounded-md text-brand-500 hover:text-brand-600 hover:bg-brand-50"
                 aria-expanded={isOpen}
               >
                 <span className="sr-only">{isOpen ? 'Close menu' : 'Open menu'}</span>
@@ -139,36 +134,22 @@ const Navbar = () => {
         <div className="md:hidden">
           <div className="pt-2 pb-3 space-y-1">
             <Link 
-              to="/" 
-              className={`${isActive('/') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'border-transparent text-gray-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </Link>
-            <Link 
               to="/menu" 
-              className={`${isActive('/menu') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'border-transparent text-gray-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+              className={`${isActive('/menu') ? 'bg-brand-50 border-brand-500 text-brand-600' : 'border-transparent text-gray-600 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
               onClick={() => setIsOpen(false)}
             >
               Menu
             </Link>
             <Link 
               to="/specials" 
-              className={`${isActive('/specials') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'border-transparent text-gray-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
+              className={`${isActive('/specials') ? 'bg-brand-50 border-brand-500 text-brand-600' : 'border-transparent text-gray-600 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
               onClick={() => setIsOpen(false)}
             >
               Today's Specials
             </Link>
             <Link 
-              to="/about" 
-              className={`${isActive('/about') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'border-transparent text-gray-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <Link 
               to="/track-orders" 
-              className={`${isActive('/track-orders') ? 'bg-orange-50 border-orange-500 text-orange-600' : 'border-transparent text-gray-600 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium relative`}
+              className={`${isActive('/track-orders') ? 'bg-brand-50 border-brand-500 text-brand-600' : 'border-transparent text-gray-600 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-600'} block pl-3 pr-4 py-2 border-l-4 text-base font-medium relative`}
               onClick={() => setIsOpen(false)}
             >
               <span className="flex items-center">
@@ -183,21 +164,13 @@ const Navbar = () => {
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="flex items-center px-4">
-              <Link to="/cart" className="flex items-center text-gray-600 hover:text-orange-500 relative" onClick={() => setIsOpen(false)}>
+              <Link to="/cart" className="flex items-center text-gray-600 hover:text-brand-500 relative" onClick={() => setIsOpen(false)}>
                 <ShoppingCart className="h-6 w-6" />
                 {totalItems > 0 && (
-                  <span className="ml-1 bg-orange-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  <span className="ml-1 bg-brand-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
                     {totalItems}
                   </span>
                 )}
-              </Link>
-            </div>
-            <div className="mt-3 space-y-1">
-              <Link to="/login" className="block px-4 py-2 text-base font-medium text-gray-600 hover:text-orange-600 hover:bg-orange-50" onClick={() => setIsOpen(false)}>
-                Admin Login
-              </Link>
-              <Link to="/signup" className="block px-4 py-2 text-base font-medium text-gray-600 hover:text-orange-600 hover:bg-orange-50" onClick={() => setIsOpen(false)}>
-                Admin Sign Up
               </Link>
             </div>
           </div>

@@ -5,9 +5,11 @@ import { publicApi } from '../services/api';
 import { RAZORPAY_KEY_ID } from '../config';
 import { formatPaise } from '../utils/money';
 import { describeLine } from '../utils/cart';
+import { useBrand } from '../contexts/BrandContext';
 
 const CheckoutPage = () => { // 
   const navigate = useNavigate();
+  const brand = useBrand();
   const { cartItems, totalPaise, updateQuantity, removeFromCart, clearCart } = useCart(); // 
   const [customerInfo, setCustomerInfo] = useState({ // 
     name: '',
@@ -112,7 +114,7 @@ const CheckoutPage = () => { //
         key: RAZORPAY_KEY_ID,
         amount: placed.totalPaise,
         currency: 'INR',
-        name: 'Campus Bites',
+        name: brand.name,
         description: `Order ${placed.code}`,
         order_id: placed.gatewayOrderId,
         handler: async (response) => {
@@ -137,7 +139,7 @@ const CheckoutPage = () => { //
           }
         },
         prefill: { name: customerInfo.name, email: customerInfo.email, contact: customerInfo.phone },
-        theme: { color: '#ff610c' },
+        theme: { color: brand.primaryColor || '#ff610c' },
         modal: { ondismiss: () => setIsProcessing(false) },
       });
       rzp.open();
@@ -163,7 +165,7 @@ const CheckoutPage = () => { //
                     <p className="text-gray-600 mb-4">Your cart is empty</p>
                     <button 
                         onClick={handleBack}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg"
+                        className="bg-brand-500 hover:bg-brand-600 text-white font-medium py-2 px-6 rounded-lg"
                     >
                         Return to Menu
                     </button>
@@ -236,7 +238,7 @@ const CheckoutPage = () => { //
                                             name="name"
                                             value={customerInfo.name}
                                             onChange={handleInputChange}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500"
                                             required
                                         />
                                     </div>
@@ -248,7 +250,7 @@ const CheckoutPage = () => { //
                                             name="email"
                                             value={customerInfo.email}
                                             onChange={handleInputChange}
-                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500"
                                             required
                                         />
                                     </div>
@@ -261,7 +263,7 @@ const CheckoutPage = () => { //
                                         name="phone"
                                         value={customerInfo.phone}
                                         onChange={handleInputChange}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500"
                                         required
                                     />
                                 </div>

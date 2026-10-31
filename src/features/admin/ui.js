@@ -3,9 +3,9 @@ import { X } from 'lucide-react';
 
 // Small shared bits for the admin screens.
 export const inputCls =
-  'w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-300';
+  'w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-300';
 export const btnPrimary =
-  'bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 text-white font-medium px-4 py-2 rounded-lg';
+  'bg-brand-500 hover:bg-brand-600 disabled:bg-gray-300 text-white font-medium px-4 py-2 rounded-lg';
 export const btnGhost = 'border border-gray-300 hover:bg-gray-50 text-gray-700 px-3 py-1.5 rounded-lg text-sm';
 export const btnDanger = 'border border-red-300 hover:bg-red-50 text-red-600 px-3 py-1.5 rounded-lg text-sm';
 

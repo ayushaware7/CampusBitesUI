@@ -103,7 +103,7 @@ const AdminMenu = () => {
                       <p className="font-medium text-gray-800">
                         {item.name}{' '}
                         <span className={`text-xs ${item.isVeg ? 'text-green-600' : 'text-red-600'}`}>● {item.isVeg ? 'Veg' : 'Non-veg'}</span>
-                        {item.isSpecial && <span className="ml-2 text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">Special</span>}
+                        {item.isSpecial && <span className="ml-2 text-xs bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full">Special</span>}
                         {!item.isAvailable && <span className="ml-2 text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Sold out</span>}
                       </p>
                       <p className="text-sm text-gray-500">

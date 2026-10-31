@@ -29,7 +29,7 @@ const MenuPage = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64 pt-16">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brand-500"></div>
       </div>
     );
   }
@@ -52,12 +52,12 @@ const MenuPage = () => {
         onClick={() => select(name)}
         className={`w-full text-left py-3 px-6 border-b border-gray-100 transition-colors duration-200 flex items-center ${
           selected === name
-            ? 'bg-orange-50 text-orange-600 font-medium border-l-4 border-l-orange-500'
+            ? 'bg-brand-50 text-brand-600 font-medium border-l-4 border-l-brand-500'
             : 'hover:bg-gray-50 text-gray-700'
         }`}
       >
         {index > 0 && (
-          <span className="mr-3 w-6 h-6 flex items-center justify-center bg-orange-500 text-white rounded-full text-sm">
+          <span className="mr-3 w-6 h-6 flex items-center justify-center bg-brand-500 text-white rounded-full text-sm">
             {index}
           </span>
         )}
@@ -72,7 +72,7 @@ const MenuPage = () => {
       <div className="md:hidden fixed top-16 left-0 right-0 bg-white shadow-md z-20 p-2">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex items-center justify-between w-full p-2 bg-orange-500 text-white rounded-lg"
+          className="flex items-center justify-between w-full p-2 bg-brand-500 text-white rounded-lg"
         >
           <span className="font-medium">Categories: {selected}</span>
           {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -87,7 +87,7 @@ const MenuPage = () => {
       <div className="flex">
         {/* Desktop sidebar */}
         <div className="hidden md:block w-64 bg-white shadow-lg fixed left-0 top-16 bottom-0 overflow-y-auto z-10">
-          <div className="p-4 bg-orange-500 text-white">
+          <div className="p-4 bg-brand-500 text-white">
             <h2 className="text-xl font-bold">Categories</h2>
           </div>
           <ul className="py-2">{categoryButtons}</ul>
@@ -117,7 +117,7 @@ const MenuPage = () => {
           <div className="bg-white shadow-lg rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold text-gray-800">Cart</span>
-              <span className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">{totalItems} items</span>
+              <span className="bg-brand-500 text-white px-2 py-1 rounded-full text-xs">{totalItems} items</span>
             </div>
             <div className="text-gray-800 font-medium">Total: {formatPaise(totalPaise)}</div>
             <button

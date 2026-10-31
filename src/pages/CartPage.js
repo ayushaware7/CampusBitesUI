@@ -76,7 +76,7 @@ const CartPage = () => {
           <div className="flex items-center">
             <button
               onClick={handleBackToMenu}
-              className="flex items-center text-orange-600 hover:text-orange-700 mr-4"
+              className="flex items-center text-brand-600 hover:text-brand-700 mr-4"
             >
               <ArrowLeft className="h-5 w-5 mr-1" />
               Back to Menu
@@ -105,7 +105,7 @@ const CartPage = () => {
             <p className="text-gray-500 mb-6">Looks like you haven't added any items to your cart yet.</p>
             <button
               onClick={handleBackToMenu}
-              className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg"
+              className="bg-brand-500 hover:bg-brand-600 text-white font-medium py-3 px-6 rounded-lg"
             >
               Browse Menu
             </button>

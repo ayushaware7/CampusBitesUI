@@ -105,7 +105,7 @@ const ItemOptionsModal = ({ item, onClose, onConfirm }) => {
           <button
             disabled={!valid}
             onClick={() => onConfirm(variant, chosen)}
-            className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 rounded-lg"
+            className="w-full bg-brand-500 hover:bg-brand-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 rounded-lg"
           >
             Add to cart · {formatPaise(total)}
           </button>

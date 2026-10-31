@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Navigate, Routes, Route, useLocation, useParams } from "react-router-dom";
 import LandingPage from './pages/landing/Landingpage';
 import TrackOrdersPage from './pages/TrackOrdersPage';
 import Navbar from './components/common/Navbar';
@@ -9,14 +9,17 @@ import TodaySpecial from './components/categories/TodaySpecial';
 import CheckoutPage from './pages/CheckoutPage';
 import CartPage from './pages/CartPage';
 import { CartProvider } from './contexts/CartContext';
-import Snacks from './components/categories/Snacks';
-import Breakfast from './components/categories/Breakfast';
-import Lunch from './components/categories/Lunch';
-import Beverages from './components/categories/Beverages';
 import AdminDashboard from './features/admin/AdminDashboard';
 import ProtectedAdminRoute from './features/admin/ProtectedAdminRoute';
 import AdminLogin from './features/admin/AdminLogin';
 import CanteenEntry from './pages/CanteenEntry';
+
+// Old category URLs (/lunch, /category/snacks) now open the menu filtered to that category.
+const CategoryRedirect = ({ name }) => {
+  const params = useParams();
+  const category = name || params.name;
+  return <Navigate to={`/menu?category=${encodeURIComponent(category)}`} replace />;
+};
 
 function App() {
   const location = useLocation();
@@ -36,10 +39,11 @@ function App() {
         <Route path="/specials" element={<TodaySpecial/>} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/snacks" element={<Snacks />} />
-        <Route path="/breakfast" element={<Breakfast />} />
-        <Route path="/lunch" element={<Lunch />} />
-        <Route path="/beverages" element={<Beverages />} />
+        <Route path="/category/:name" element={<CategoryRedirect />} />
+        <Route path="/snacks" element={<CategoryRedirect name="Snacks" />} />
+        <Route path="/breakfast" element={<CategoryRedirect name="Breakfast" />} />
+        <Route path="/lunch" element={<CategoryRedirect name="Lunch" />} />
+        <Route path="/beverages" element={<CategoryRedirect name="Beverages" />} />
         <Route path="/track-orders" element={<TrackOrdersPage />} />
 
         <Route path="/admin/login" element={<AdminLogin />} />

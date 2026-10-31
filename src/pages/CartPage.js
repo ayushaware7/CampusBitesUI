@@ -2,10 +2,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { ShoppingCart, Plus, Minus, Trash2, ArrowLeft } from 'lucide-react';
+import { formatPaise } from '../utils/money';
+import { describeLine } from '../utils/cart';
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { cartItems, totalItems, totalPrice, updateQuantity, removeFromCart, clearCart } = useCart();
+  const { cartItems, totalItems, totalPaise, updateQuantity, removeFromCart, clearCart } = useCart();
   
   
   
@@ -144,12 +146,10 @@ const CartPage = () => {
                             {item.name}
                           </h3>
                           <p className="text-sm text-gray-500">
-                            ₹{item.price.toFixed(2)} per item
+                            {formatPaise(item.unitPricePaise)} per item
                           </p>
-                          {item.category && (
-                            <span className="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full mt-1">
-                              {item.category}
-                            </span>
+                          {describeLine(item) && (
+                            <p className="text-sm text-gray-600 mt-1">{describeLine(item)}</p>
                           )}
                         </div>
                         
@@ -175,7 +175,7 @@ const CartPage = () => {
                         {/* Item Total & Remove */}
                         <div className="text-right">
                           <p className="text-lg font-semibold text-green-600">
-                            ₹{(item.price * item.quantity).toFixed(2)}
+                            {formatPaise(item.unitPricePaise * item.quantity)}
                           </p>
                           <button
                             onClick={() => handleRemoveItem(item.id)}
@@ -200,13 +200,13 @@ const CartPage = () => {
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between text-gray-600">
                     <span>Items ({totalItems})</span>
-                    <span>₹{totalPrice.toFixed(2)}</span>
+                    <span>{formatPaise(totalPaise)}</span>
                   </div>
                   
                   <div className="border-t border-gray-200 pt-3">
                     <div className="flex justify-between text-lg font-bold text-gray-900">
                       <span>Total</span>
-                      <span>₹{(totalPrice ).toFixed(2)}</span>
+                      <span>{formatPaise(totalPaise)}</span>
                     </div>
                   </div>
                 </div>

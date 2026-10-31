@@ -1,13 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageCarousel from '../../components/common/ImageCarousel';
-import { useCart } from '../../contexts/CartContext'; // Import the useCart hook
-import { ShoppingCart } from 'lucide-react'; // Import the cart icon
+import SpecialsGrid from '../../components/menu/SpecialsGrid';
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  // Use the cart context to access cart functionality
-  const { addToCart } = useCart();
 
   // Sample food categories
   const categories = [
@@ -15,71 +12,6 @@ const LandingPage = () => {
     { name: 'Fast Food', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuDicjACF8jqE3vr1WxFItibReuZEnXbVclA&s', count: 10 },
     { name: 'Beverages', image: 'images/beverages.jpeg', count: 8 },
   ];
-
-  // Popular items - Now with proper structure to match MenuPage items
-  const popularItems = [
-    { 
-      id: 'p1', 
-      name: 'Chicken Sandwich', 
-      price: 204.99, 
-      rating: 4.8, 
-      image: 'images/grilledsandwich.jpg',
-      category: 'Lunch'
-    },
-    { 
-      id: 'p2', 
-      name: 'Veggie Wrap', 
-      price: 39.99, 
-      rating: 4.5, 
-      image: 'images/vegie.jpg',
-      category: 'Lunch' 
-    },
-    { 
-      id: 'p3', 
-      name: 'Cheese Pizza', 
-      price: 500.49, 
-      rating: 4.7, 
-      image: 'images/Pizza.jpg',
-      category: 'Fast Food'
-    },
-    { 
-      id: 'p4', 
-      name: 'Fruit Smoothie', 
-      price: 200.99, 
-      rating: 4.6, 
-      image: 'images/fruitsmoothie.jpg',
-      category: 'Beverages'
-    },
-  ];
-
-  // Function to handle add to cart, using the same approach as MenuPage
-  const handleAddToCart = (item) => {
-    addToCart(item);
-    // Show a brief notification (optional)
-    alert(`${item.name} added to cart!`);
-  };
-
-  // Function to render stars based on rating (same as MenuPage)
-  const renderStars = (rating) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-    
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<span key={`full-${i}`} className="text-yellow-400">★</span>);
-    }
-    
-    if (halfStar) {
-      stars.push(<span key="half" className="text-yellow-400">★</span>);
-    }
-    
-    const emptyStars = 5 - stars.length;
-    for (let i = 0; i < emptyStars; i++) {
-      stars.push(<span key={`empty-${i}`} className="text-gray-300">☆</span>);
-    }
-    
-    return stars;
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -180,8 +112,7 @@ const LandingPage = () => {
                   </div>
                   <div className="p-4">
                     <h3 className="text-lg font-medium text-gray-900">{category.name}</h3>
-                    <p className="mt-1 text-sm text-gray-500">{category.count} items</p>
-                    <a href={`/category/${category.name.toLowerCase()}`} className="mt-2 block text-orange-500 hover:text-orange-600 font-medium">
+                    <a href={`/menu?category=${encodeURIComponent(category.name)}`} className="mt-2 block text-orange-500 hover:text-orange-600 font-medium">
                       Browse &rarr;
                     </a>
                   </div>
@@ -204,35 +135,8 @@ const LandingPage = () => {
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {popularItems.map((item, index) => (
-              <div key={index} className="relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-40 object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-lg font-medium text-gray-900">{item.name}</h3>
-                    <div className="flex items-center">
-                      {renderStars(item.rating)}
-                      <span className="ml-1 text-gray-600 text-xs">({item.rating})</span>
-                    </div>
-                  </div>
-                  <p className="mt-1 text-sm font-bold text-gray-900">₹{item.price.toFixed(2)}</p>
-                  <button 
-                    onClick={() => handleAddToCart(item)}
-                    className="mt-4 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition duration-300 flex items-center justify-center"
-                  >
-                    <ShoppingCart className="h-5 w-5 mr-2" />
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
+          <div className="mt-10">
+            <SpecialsGrid limit={4} />
           </div>
         </div>
       </div>

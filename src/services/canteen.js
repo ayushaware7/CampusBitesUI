@@ -1,8 +1,6 @@
 // The canteen comes from the QR code (/c/:slug) and is remembered in localStorage.
-// With no slug stored, the backend falls back to its DEFAULT_CANTEEN.
+export const DEFAULT_CANTEEN = 'main-canteen';
+
 export const setCanteenSlug = (slug) => localStorage.setItem('canteenSlug', slug);
 
-export const canteenHeaders = () => {
-  const slug = localStorage.getItem('canteenSlug');
-  return slug ? { 'X-Canteen': slug } : {};
-};
+export const getCanteenSlug = () => localStorage.getItem('canteenSlug') || DEFAULT_CANTEEN;

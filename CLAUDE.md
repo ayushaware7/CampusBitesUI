@@ -29,7 +29,7 @@ contexts/BrandContext loads the restaurant (GET /canteens/{slug}) and applies na
 utils/money.js       formatPaise, toPaise, toRupees      utils/cart.js buildLine, describeLine
 hooks/useMenu.js     loads the public menu
 components/menu/     ItemCard, ItemOptionsModal (size + add-on picker), ItemGrid, SpecialsGrid
-components/common/   Navbar, About, ImageCarousel      components/categories/TodaySpecial
+components/common/   Navbar      components/categories/TodaySpecial
 pages/               menu, CartPage, CheckoutPage, TrackOrdersPage, CanteenEntry (/r/:slug and /c/:slug). No landing/About: those moved to the company site
 features/admin/      AdminLogin, AdminDashboard (tabs + live-orders badge), AdminMenu, ItemForm, AdminAddonGroups,
                      AdminLiveOrders, AdminPastOrders, AdminBranding (name/tagline/logo/colour), OrderCard, useLiveOrders (polls every 5s), ui.js (shared styles/Modal)
@@ -56,7 +56,7 @@ server; there is no "Pay now" to resume it yet (see the overview's Known gaps).
 - Razorpay India test mode rejects the `4111...` Visa as international; use UPI `success@razorpay` in the popup.
 - The menu API returns `pricePaise`; anything still reading `price` (rupees) is a bug from the old backend.
 - Large image files are not in git (`public/images/Pizza.jpg` stays untracked on purpose). Do not `git add -A` blindly in `public/images`.
-- Build lint warnings in `Navbar.js`, `CartPage.js`, `ImageCarousel.js` are old and harmless.
+- Build lint warnings (unused variables) in `Navbar.js` and `CartPage.js` are old and harmless.
 - Check `netstat -ano | findstr :3000` for a stale dev server before starting another.
 
 ## Layout of the app (customer vs admin)
@@ -75,6 +75,6 @@ countdown. Wait for the backend design to be agreed first. Also parked: the orde
 which would change `lastOrder` to also hold a token.
 
 ## Git
-Branch `feature/product-rebrand` holds the current work (based on `feature/new-backend-menu-orders`; PRs to `main` pending); it only works with the
-new Gin backend with migration `000006` applied. Commit/push only when asked, on a feature branch. `.env.local` is gitignored.
+`main` holds the new-backend UI and the product/branding split (merged via PRs #1 and #2). Do new work on a feature branch and open a PR. It only works with the
+new Gin backend with migration `000006` applied. Commit/push only when asked. `.env.local` is gitignored.
 `public/images/Pizza.jpg` stays untracked on purpose.

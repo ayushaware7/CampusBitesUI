@@ -43,7 +43,7 @@ const AdminLogin = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full h-12 border-2 border-gray-200 rounded-xl px-4 py-3 mt-1 focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+              className="w-full h-12 border-2 border-gray-200 rounded-xl px-4 py-3 mt-1 focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
               placeholder="Enter username"
               required
             />
@@ -56,7 +56,7 @@ const AdminLogin = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full h-12 border-2 border-gray-200 rounded-xl px-4 py-3 mt-1 focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+              className="w-full h-12 border-2 border-gray-200 rounded-xl px-4 py-3 mt-1 focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
               placeholder="Enter password"
               required
             />
@@ -69,7 +69,7 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-orange-600 hover:to-red-600 transform hover:scale-105 transition-all duration-300 shadow-lg disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-brand-500 to-red-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-brand-600 hover:to-red-600 transform hover:scale-105 transition-all duration-300 shadow-lg disabled:opacity-50"
           >
             {isLoading ? 'Logging in...' : 'Login'}
           </button>

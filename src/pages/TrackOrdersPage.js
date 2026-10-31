@@ -11,7 +11,7 @@ const LABEL = {
   PREPARING: 'Being prepared',
   READY: 'Ready for pickup!',
   COMPLETED: 'Collected',
-  REJECTED: 'Rejected by the canteen',
+  REJECTED: 'Rejected by the restaurant',
   CANCELLED: 'Cancelled',
 };
 const ACTIVE = ['PENDING_PAYMENT', 'PLACED', 'PREPARING', 'READY'];
@@ -86,7 +86,7 @@ const TrackOrdersPage = () => {
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <button className="bg-orange-500 hover:bg-orange-600 text-white font-medium px-5 py-2 rounded-lg" type="submit">
+          <button className="bg-brand-500 hover:bg-brand-600 text-white font-medium px-5 py-2 rounded-lg" type="submit">
             {loading ? 'Looking…' : 'Find order'}
           </button>
         </form>
@@ -98,12 +98,12 @@ const TrackOrdersPage = () => {
             <div className="flex flex-wrap justify-between items-start gap-2 mb-4">
               <div>
                 <p className="text-sm text-gray-500">Pickup code</p>
-                <p className="text-3xl font-bold tracking-widest text-orange-600">{order.code}</p>
+                <p className="text-3xl font-bold tracking-widest text-brand-600">{order.code}</p>
               </div>
               <p className={`px-3 py-1 rounded-full text-sm font-medium ${
                 order.status === 'READY' ? 'bg-green-100 text-green-700'
                 : order.status === 'REJECTED' || order.status === 'CANCELLED' ? 'bg-red-100 text-red-700'
-                : 'bg-orange-100 text-orange-700'}`}>
+                : 'bg-brand-100 text-brand-700'}`}>
                 {LABEL[order.status] || order.status}
               </p>
             </div>
@@ -112,14 +112,14 @@ const TrackOrdersPage = () => {
               <div className="flex items-center mb-6">
                 {STEPS.map((s, i) => (
                   <React.Fragment key={s}>
-                    <div className={`h-3 w-3 rounded-full ${i <= stepIndex ? 'bg-orange-500' : 'bg-gray-300'}`} title={LABEL[s]} />
-                    {i < STEPS.length - 1 && <div className={`flex-1 h-1 ${i < stepIndex ? 'bg-orange-500' : 'bg-gray-300'}`} />}
+                    <div className={`h-3 w-3 rounded-full ${i <= stepIndex ? 'bg-brand-500' : 'bg-gray-300'}`} title={LABEL[s]} />
+                    {i < STEPS.length - 1 && <div className={`flex-1 h-1 ${i < stepIndex ? 'bg-brand-500' : 'bg-gray-300'}`} />}
                   </React.Fragment>
                 ))}
               </div>
             )}
             {order.status === 'REJECTED' && (
-              <p className="text-sm text-gray-600 mb-4">The canteen could not make this order. Please contact them about your refund.</p>
+              <p className="text-sm text-gray-600 mb-4">The restaurant could not make this order. Please contact them about your refund.</p>
             )}
 
             <ul className="divide-y">
@@ -142,7 +142,7 @@ const TrackOrdersPage = () => {
           </div>
         )}
 
-        <button onClick={() => navigate('/menu')} className="mt-6 text-orange-600 hover:text-orange-700 font-medium">
+        <button onClick={() => navigate('/menu')} className="mt-6 text-brand-600 hover:text-brand-700 font-medium">
           ← Back to menu
         </button>
       </div>

@@ -10,7 +10,7 @@ const ItemCard = ({ item, onAdd }) => {
       <div className="relative h-48 w-full overflow-hidden bg-gray-200">
         {item.imageUrl && <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />}
         {item.isSpecial && (
-          <span className="absolute top-2 left-2 bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+          <span className="absolute top-2 left-2 bg-brand-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
             Today's special
           </span>
         )}
@@ -34,7 +34,7 @@ const ItemCard = ({ item, onAdd }) => {
         <button
           disabled={!item.isAvailable}
           onClick={() => onAdd(item)}
-          className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+          className="w-full bg-brand-500 hover:bg-brand-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
         >
           {!item.isAvailable ? 'Sold out' : customisable ? 'Customise' : 'Add to Cart'}
         </button>

@@ -35,6 +35,7 @@ const save = (base, id, body) =>
 const canteenPath = () => `/api/v1/canteens/${encodeURIComponent(getCanteenSlug())}`;
 
 export const publicApi = {
+  canteen: () => request(canteenPath()),
   menu: () => request(`${canteenPath()}/menu`),
   // The server prices the cart itself: send ids and quantities only.
   placeOrder: (body) => request(`${canteenPath()}/orders`, { method: 'POST', body }),
@@ -45,6 +46,8 @@ export const publicApi = {
 
 export const adminApi = {
   login: (username, password) => request('/auth/login', { method: 'POST', body: { username, password } }),
+  canteen: () => request('/api/v1/admin/canteen', { auth: true }),
+  saveCanteen: (body) => request('/api/v1/admin/canteen', { method: 'PUT', body, auth: true }),
   menu: () => request('/api/v1/admin/menu', { auth: true }),
 
   saveCategory: (id, body) => save('/api/v1/admin/categories', id, body),

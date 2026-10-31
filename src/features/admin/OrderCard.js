@@ -15,7 +15,7 @@ const OrderCard = ({ order, children }) => (
   <div className="bg-white rounded-lg shadow p-5">
     <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
       <div>
-        <p className="text-2xl font-bold tracking-widest text-orange-600">{order.code}</p>
+        <p className="text-2xl font-bold tracking-widest text-brand-600">{order.code}</p>
         <p className="text-sm text-gray-600">
           {order.customerName} · {order.customerPhone}
         </p>
